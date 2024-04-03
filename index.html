@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أزرار HTML</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    background-color: #4CAF50;
+    color: #fff;
+    transition: background-color 0.3s;
+  }
+  button:hover {
+    background-color: #45a049;
+  }
+  input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: calc(100% - 20px);
+    margin-bottom: 10px;
+  }
+  input[type="text"]::placeholder {
+    color: #999;
+  }
+  button#sendButton {
+    background-color: #008CBA;
+  }
+  button#sendButton:hover {
+    background-color: #005f77;
+  }
+</style>
+<script>
+function sendData() {
+  var value = document.getElementById("inputField").value;
+  fetch('https://java-9d77b-default-rtdb.firebaseio.com/tiktok.json', {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ username: value, send_data: 'stop' ,check_box : 'Sent successfully, please wait'})
+  })
+  .then(response => {
+    if (response.ok) {
+      console.log('Value sent successfully');
+	  document.getElementById("check_box").innerText = 'Sent successfully, please wait';
+    } else {
+      console.log('Failed to send value');
+	  document.getElementById("check_box").innerText = 'Sending failed, try again';
+    }
+  })
+  .catch(error => {
+    console.error('An error occurred:', error);
+	document.getElementById("check_box").innerText = 'Sending failed, try again';
+
+  });
+}
+
+
+function myFunction1() {
+    fetch('https://java-9d77b-default-rtdb.firebaseio.com/tiktok.json', {
+        method: 'GET', // استخدام طريقة GET لاسترداد البيانات
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json(); // استرداد البيانات كملف JSON
+        } else {
+            throw new Error('فشل في الحصول على البيانات');
+        }
+    })
+    .then(data => {
+        // تعامل مع البيانات المستردة هنا
+        var username = data.task; // استخراج username من البيانات المستردة
+        var tiktokUrl = 'https://www.tiktok.com/@' + username; // توليد الرابط
+        console.log('تم الحصول على البيانات بنجاح:', username);
+
+        // فتح الرابط في نافذة جديدة
+        window.open(tiktokUrl);
+    })
+    .catch(error => {
+        console.error('حدث خطأ:', error);
+    });
+	
+}
+
+
+
+
+
+function myFunction2() {
+	  fetch('https://java-9d77b-default-rtdb.firebaseio.com/tiktok.json', {
+	  method: 'PATCH',
+	  headers: {
+		'Content-Type': 'application/json',
+	  },
+	  body: JSON.stringify({ check: 'start' }),
+	})
+	.then(response => {
+	  if (response.ok) {
+		console.log('تم التحديث بنجاح');
+	  } else {
+		console.log('فشل في تحديث الحقل');
+	  }
+	})
+	.catch(error => {
+	  console.error('حدث خطأ:', error);
+	});
+    fetch('https://java-9d77b-default-rtdb.firebaseio.com/tiktok.json', {
+        method: 'GET', // استخدام طريقة GET لاسترداد البيانات
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json(); // استرداد البيانات كملف JSON
+        } else {
+            throw new Error('فشل في الحصول على البيانات');
+        }
+    })
+    .then(data => {
+        var balance = data.balance;
+        document.getElementById("balance").innerText = balance;
+
+        console.log('تم الحصول على البيانات بنجاح:', username);
+
+        // فتح الرابط في نافذة جديدة
+        window.open(tiktokUrl);
+    })
+    .catch(error => {
+        console.error('حدث خطأ:', error);
+    });
+
+}
+
+
+// تنفيذ الوظيفة check() كل 5 
+
+function myFunction3() {
+
+	  fetch('https://java-9d77b-default-rtdb.firebaseio.com/tiktok.json', {
+	  method: 'PATCH',
+	  headers: {
+		'Content-Type': 'application/json',
+	  },
+	  body: JSON.stringify({ check: 'close' }),
+	})
+	.then(response => {
+	  if (response.ok) {
+		console.log('تم التحديث بنجاح');
+	  } else {
+		console.log('فشل في تحديث الحقل');
+	  }
+	})
+	.catch(error => {
+	  console.error('حدث خطأ:', error);
+	});
+	
+}
+
+function check() {
+    fetch('https://java-9d77b-default-rtdb.firebaseio.com/tiktok.json', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('فشل في الحصول على البيانات');
+        }
+    })
+    .then(data => {
+        var check_box = data.check_box;
+		var balance = data.balance;
+        document.getElementById("balance").innerText = balance;
+        document.getElementById("check_box").innerText = check_box;
+
+        console.log('تم الحصول على البيانات بنجاح:', check_box);
+
+        // فتح الرابط في نافذة جديدة - يجب تعريف متغير tiktokUrl
+        // window.open(tiktokUrl);
+    })
+    .catch(error => {
+        console.error('حدث خطأ:', error);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    // يتم استدعاء الدالة check() فور تحميل الصفحة
+    check();
+	setInterval(check, 5000);
+});
+</script>
+</head>
+<body>
+
+<div class="container">
+  <h2 id="balance">100</h2>
+  <h2 id="check_box"></h2>
+  <button id="button1" onclick="myFunction1()">فتح</button>
+  <button id="button2" onclick="myFunction2()">فحص</button>
+  <button id="button3" onclick="myFunction3()">اعاده تنشيط</button>
+  <input type="text" id="inputField" placeholder="أدخل القيمة هنا">
+  <button id="sendButton" onclick="sendData()">إرسال</button>
+</div>
+
+</body>
+</html>
